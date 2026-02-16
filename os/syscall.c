@@ -46,7 +46,7 @@ uint64 sys_task_info(TaskInfo *ti)
 
     struct proc *p = curr_proc();
 
-    ti->status = RUNNING;
+    ti->status = Running;
 
     for(int i = 0; i < MAX_SYSCALL_NUM; i++) {
         ti->syscall_times[i] = p->syscall_times[i];
