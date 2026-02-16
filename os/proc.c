@@ -63,6 +63,10 @@ found:
 	p->pid = allocpid();
 	p->state = USED;
 	memset(&p->context, 0, sizeof(p->context));
+
+	memset(p->syscall_times, 0, sizeof(p->syscall_times));
+	p->start_time = 0;
+
 	memset(p->trapframe, 0, PAGE_SIZE);
 	memset((void *)p->kstack, 0, PAGE_SIZE);
 	p->context.ra = (uint64)usertrapret;
@@ -86,6 +90,11 @@ void scheduler(void)
 				*/
 				p->state = RUNNING;
 				current_proc = p;
+
+				if(p->start_time == 0) {
+        			p->start_time = get_cycle();
+    			}
+
 				swtch(&idle.context, &p->context);
 			}
 		}
