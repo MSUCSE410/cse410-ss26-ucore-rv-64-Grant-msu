@@ -2,6 +2,8 @@
 #include "defs.h"
 #include "loader.h"
 #include "trap.h"
+//My code
+#include "timer.h"
 
 struct proc pool[NPROC];
 char kstack[NPROC][PAGE_SIZE];
